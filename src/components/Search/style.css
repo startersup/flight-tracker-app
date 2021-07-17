@@ -30,6 +30,14 @@
     border-radius:0;
     box-shadow: rgb(28 39 43 / 20%) 0px 5px 8px;
 }
+.ft-sm-inputs
+{
+    border:1px solid #cccccc;
+    width:150px;
+    height:45px;
+    border-radius:0;
+    box-shadow: rgb(28 39 43 / 20%) 0px 5px 8px;
+}
 .d-flex
 {
     display: flex;
