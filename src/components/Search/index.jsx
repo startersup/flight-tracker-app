@@ -28,12 +28,8 @@ const fetchData = () => {
   .then(response => response.json())
   .then(json => 
     {
-        this.setState({
-            isLoaded: true,
-            items: json,
-        })
-    }
-    )
+        console.log(json);
+        });
 };
 
      
@@ -49,6 +45,7 @@ const fetchData = () => {
                </section>
                 </div>
                 );
+
 
         };
 
