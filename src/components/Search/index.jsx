@@ -29,7 +29,9 @@ const fetchData = () => {
         responseType: 'json',
         headers: {
             'appId' : '4a25e0eb',
-            'appKey' : 'e6254fb07950dbe2ebe2d87baf740679'
+            'appKey' : 'e6254fb07950dbe2ebe2d87baf740679',
+            'Access-Control-Allow-Origin':'https://flight-trackerapp.herokuapp.com/',
+            'Access-Control-Allow-Credentials': true
         }
       })
         .then(function (response) {
