@@ -1,48 +1,66 @@
-import React from 'react';
-import { DatePicker, Input, Button } from 'antd';
+import React, { useState } from "react";
+import axios from "axios";
+import { DatePicker, Input, Button, message } from 'antd';
 import './style.css';
 import Navbar from '../navbar'
 
 
-        export default () => {
-
-
+        const search = ({setCarrier, setDate, setFlightNumber, flightNumber, date, carrier}) => {
+ 
 const onFlightChange = (e) =>  {
-console.log(e.target.value);
+setFlightNumber(e.target.value);;
+
 };
 
-const onCarrierChange = (f) => {
-    console.log(f.target.value);
+const onCarrierChange = (e) => {
+    console.log(e.target.value);
+  setCarrier (e.target.value);
 }
 
 const onChangeDate = (date, dateString) => {
-    console.log(dateString);
+setDate(dateString)
+console.log(dateString);
 }
 
-const fetchData = () => {
+var dateFormat = date.replace('-', '/'); 
+var refineFormat = dateFormat.replace('-','/');
+console.log(date, refineFormat);
 
+const fetchData = (e) => {
+    if(!carrier || !flightNumber || !date)
+    {
+        message.error('All the Inputs are Required');
+    return;
+    }
+    else 
+    {
+        const key = 'updatable';
+        message.loading({ content: 'Fetching...', key });
+    }
+    e.preventDefault();
+    
     const axios = require('axios');
-//https://cors-anywhere.herokuapp.com
     axios({
         method: 'get',
-        url: 'https://cors-anywhere.herokuapp.com/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/BA/2630/arr/2021/7/17',
+        url: "https://cors-anywhere.herokuapp.com/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/"+ setCarrier + "/"+ SetFlight + "/arr/" + refineFormat,
         responseType: 'json',
         headers: {
             'appId' : '4a25e0eb',
             'appKey' : 'e6254fb07950dbe2ebe2d87baf740679',
-            // 'Access-Control-Allow-Origin':'https://flight-trackerapp.herokuapp.com/',
-            // 'Access-Control-Allow-Credentials': true
         }
       })
         .then(function (response) {
-         console.log(response);
+            const key = 'updatable';
+            setTimeout(() => {
+                message.success({ content: 'Fetched', key, duration: 10 });
+              }, 3000);
         });
 };
 
      
             return( <div>
                 <Navbar/>
-                <section className="d-flex searchbar-wrapper">
+              <section className="d-flex searchbar-wrapper">
                 <div>
                 <Input placeholder="Carrier Eg: EZY" size={10} onChange={onCarrierChange}  className="ft-sm-inputs" />
                 </div>
@@ -58,6 +76,7 @@ const fetchData = () => {
 
         };
 
+        export default search;
 
 
 
